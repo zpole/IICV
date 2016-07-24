@@ -6,7 +6,7 @@ im = im2single(im) ;
   %slic
   segments = vl_slic(im, 500, 1, 'verbose') ;
   [sx,sy]=vl_grad(double(segments), 'type', 'forward') ;
-  s = find(sx | sy) ;     %save the number of edge pixels
+  s = find(sx | sy) ;     %save the index of edge pixels
   %slic end
   
   h = size(im,1) ;

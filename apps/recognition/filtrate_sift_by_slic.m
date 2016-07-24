@@ -50,5 +50,4 @@ features.frame(:,all(features.frame==0,1))=[] ;
 features.descr(:,all(features.descr==0,1))=[] ;
 features.contrast(:,all(features.contrast==0,1))=[] ;
 
-save aha.mat;
 feature = features;
