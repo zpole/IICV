@@ -55,3 +55,7 @@ opt/*
 
 # iDraw files
 *.idraw
+
+*.mat
+
+data/lite-voc07-vlad-aug/diary.txt
