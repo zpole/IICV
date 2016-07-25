@@ -1,4 +1,4 @@
-function demofortest()
+function filtrate_sift_by_slic_demo()
 
 im = imread(fullfile(vl_root,'data','roofs1.jpg')) ;
 im = im2single(im) ;

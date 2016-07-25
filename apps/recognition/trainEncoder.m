@@ -131,22 +131,23 @@ encoder.geometricExtension = opts.geometricExtension ;
 %% Step 0: obtain sample image descriptors
 numImages = numel(images) ;
 numDescrsPerImage = ceil(opts.numWords * opts.numSamplesPerWord / numImages) ;
+fprintf('numImages:%d\n', numImages);
 parfor i = 1:numImages
   fprintf('%s: reading: %s\n', mfilename, images{i}) ;
   im = encoder.readImageFn(images{i}) ;
   
   %slic
-  %segments = vl_slic(im, 100, 1, 'verbose') ;
-  %[sx,sy]=vl_grad(double(segments), 'type', 'forward') ;
-  %s = find(sx | sy) ;     %save the number of edge pixels
+  segments = vl_slic(im, 100, 1, 'verbose') ;
+  [sx,sy]=vl_grad(double(segments), 'type', 'forward') ;
+  s = find(sx | sy) ;     %save the number of edge pixels
   %slic end
   
   w = size(im,2) ;
   h = size(im,1) ;
   features = encoder.extractorFn(im) ;     %getdensesift（default）
-  %fprintf('%d,%d\n', size(features.frame,2) , size(s,1)) ;
+  fprintf('%d,%d\n', size(features.frame,2) , size(s,1)) ;
   
-  %features = filtrate_sift_by_slic(h,s,features);       %filtrate sift descriptor by slic edge
+  features = filtrate_sift_by_slic(h,s,features);       %filtrate sift descriptor by slic edge
   
   randn('state',0) ;
   rand('state',0) ;
