@@ -135,9 +135,8 @@ fprintf('numImages:%d\n', numImages);
 parfor i = 1:numImages
   fprintf('%s: reading: %s\n', mfilename, images{i}) ;
   im = encoder.readImageFn(images{i}) ;
-  
   %slic
-  segments = vl_slic(im, 100, 1, 'verbose') ;
+  segments = vl_slic(im, 50, 0.1, 'verbose') ;
   [sx,sy]=vl_grad(double(segments), 'type', 'forward') ;
   s = find(sx | sy) ;     %save the number of edge pixels
   %slic end
