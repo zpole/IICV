@@ -58,4 +58,6 @@ opt/*
 
 *.mat
 
-data/lite-voc07-vlad-aug/diary.txt
+data/lite-voc07-vlad-aug
+
+data/ex-voc07-vlad-aug
