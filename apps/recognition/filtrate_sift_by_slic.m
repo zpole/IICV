@@ -89,6 +89,6 @@ switch opts
         features.infodcolor(:,all(features.infodcolor==0,1))=[] ;
         features.dcolor(:,all(features.dcolor==0,1))=[] ;
 end
-printf('complete filtrate!\n');
+%printf('complete filtrate!\n');
 
 feature = features;
