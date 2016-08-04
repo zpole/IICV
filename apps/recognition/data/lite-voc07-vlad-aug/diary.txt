@@ -1,0 +1,50 @@
+options:
+          dataset: 'voc07'
+           prefix: 'lite-voc07-vlad-aug'
+    encoderParams: {1x18 cell}
+             seed: 1
+             lite: 1
+                C: 10
+           kernel: 'linear'
+          dataDir: 'data'
+       datasetDir: 'data\voc07'
+        resultDir: 'data\lite-voc07-vlad-aug'
+         imdbPath: 'data\lite-voc07-vlad-aug\imdb.mat'
+      encoderPath: 'data\lite-voc07-vlad-aug\encoder.mat'
+        modelPath: 'data\lite-voc07-vlad-aug\model.mat'
+        diaryPath: 'data\lite-voc07-vlad-aug\diary.txt'
+         cacheDir: 'data\lite-voc07-vlad-aug\cache'
+
+Downloading VOC data 'http://host.robots.ox.ac.uk/pascal/VOC/voc2007/VOCtrainval_06-Nov-2007.tar' to 'data\voc07'. This will take a while.{Operation terminated by user during <a href="matlab:matlab.internal.language.introspective.errorDocCallback('urlreadwrite', 'G:\Program Files\MATLAB\MATLAB Production Server\R2015a\toolbox\matlab\iofun\private\urlreadwrite.m', 76)" style="font-weight:bold">urlreadwrite</a> (<a href="matlab: opentoline('G:\Program Files\MATLAB\MATLAB Production Server\R2015a\toolbox\matlab\iofun\private\urlreadwrite.m',76,0)">line 76</a>)
+
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('urlwrite', 'G:\Program Files\MATLAB\MATLAB Production Server\R2015a\toolbox\matlab\iofun\urlwrite.m', 38)" style="font-weight:bold">urlwrite</a> (<a href="matlab: opentoline('G:\Program Files\MATLAB\MATLAB Production Server\R2015a\toolbox\matlab\iofun\urlwrite.m',38,0)">line 38</a>)
+[f,status] = urlreadwrite(mfilename,catchErrors,url,filename,varargin{:});
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('checkfilename>validateFilename', 'G:\Program Files\MATLAB\MATLAB Production Server\R2015a\toolbox\matlab\iofun\private\checkfilename.m', 116)" style="font-weight:bold">checkfilename>validateFilename</a> (<a href="matlab: opentoline('G:\Program Files\MATLAB\MATLAB Production Server\R2015a\toolbox\matlab\iofun\private\checkfilename.m',116,0)">line 116</a>)
+      fullfilename = urlwrite(filename, urltempname);
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('checkfilename', 'G:\Program Files\MATLAB\MATLAB Production Server\R2015a\toolbox\matlab\iofun\private\checkfilename.m', 49)" style="font-weight:bold">checkfilename</a> (<a href="matlab: opentoline('G:\Program Files\MATLAB\MATLAB Production Server\R2015a\toolbox\matlab\iofun\private\checkfilename.m',49,0)">line 49</a>)
+[fullfilename, fid] = validateFilename( ...
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('parseUnArchiveInputs', 'G:\Program Files\MATLAB\MATLAB Production Server\R2015a\toolbox\matlab\iofun\private\parseUnArchiveInputs.m', 81)" style="font-weight:bold">parseUnArchiveInputs</a> (<a href="matlab: opentoline('G:\Program Files\MATLAB\MATLAB Production Server\R2015a\toolbox\matlab\iofun\private\parseUnArchiveInputs.m',81,0)">line 81</a>)
+[archiveFilename, url] = checkfilename(archiveFilename, validExtensions, ...
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('untar', 'G:\Program Files\MATLAB\MATLAB Production Server\R2015a\toolbox\matlab\iofun\untar.m', 49)" style="font-weight:bold">untar</a> (<a href="matlab: opentoline('G:\Program Files\MATLAB\MATLAB Production Server\R2015a\toolbox\matlab\iofun\untar.m',49,0)">line 49</a>)
+[tarFilename, outputDir, url, urlFilename, uncompressFcn] = ...
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('setupVoc', 'G:\VL\New_vl\apps\recognition\setupVoc.m', 56)" style="font-weight:bold">setupVoc</a> (<a href="matlab: opentoline('G:\VL\New_vl\apps\recognition\setupVoc.m',56,0)">line 56</a>)
+    untar(urls{i}, datasetDir) ;
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('traintest', 'G:\VL\New_vl\apps\recognition\traintest.m', 52)" style="font-weight:bold">traintest</a> (<a href="matlab: opentoline('G:\VL\New_vl\apps\recognition\traintest.m',52,0)">line 52</a>)
+   case 'voc07', imdb = setupVoc(opts.datasetDir, 'lite', opts.lite, 'edition', '2007') ;
+
+In <a href="matlab:matlab.internal.language.introspective.errorDocCallback('experiments', 'G:\VL\New_vl\apps\recognition\experiments.m', 157)" style="font-weight:bold">experiments</a> (<a href="matlab: opentoline('G:\VL\New_vl\apps\recognition\experiments.m',157,0)">line 157</a>)
+    traintest(...
+} 
+{Error using <a href="matlab:matlab.internal.language.introspective.errorDocCallback('rmdir')" style="font-weight:bold">rmdir</a>
+G:\VL\New_vl\apps\recognition\data\lite-voc07-vlad-aug\diary.txt could not be removed.
+G:\VL\New_vl\apps\recognition\data\lite-voc07-vlad-aug could not be removed.
+
+} 
+experiments

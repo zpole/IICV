@@ -23,9 +23,9 @@ end
 
 for i = 2:size(features.frame,2)    
     
-    a = 8 / 3 * abs(temp(1,index) - features.frame(1,i));
+    a = 4 / 3 * abs(temp(1,index) - features.frame(1,i));
     a = a * a;
-    b = 8 / 3 * abs(temp(2,index) - features.frame(2,i));
+    b = 4 / 3 * abs(temp(2,index) - features.frame(2,i));
     b = b * b;
     c = features.frame(3,i) * features.frame(3,i);
     if a + b <= c
@@ -33,7 +33,6 @@ for i = 2:size(features.frame,2)
         features.descr(:,i) = 0;
         features.contrast(:,i) = 0;
         continue
-        
     else
         Q = [features.frame(1,i);features.frame(2,i)];
         [index, dist] = vl_kdtreequery (kdtree, temp, Q, 'MaxNumComparisons', 1);

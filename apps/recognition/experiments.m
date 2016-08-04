@@ -20,7 +20,7 @@ function experiments()
 % This file is part of the VLFeat library and is made available under
 % the terms of the BSD license (see the COPYING file).
 
-lite = false ;
+lite = 1;
 clear ex ;
 
 ex(1).prefix = 'fv-aug' ;
