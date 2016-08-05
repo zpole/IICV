@@ -18,11 +18,6 @@ kdtree = vl_kdtreebuild( temp ) ;
 
 switch opts
     case 'dsift'
-        sel = vl_colsubset(1:size(features.descr,2), 2560) ;
-        features.frame = features.frame(:,sel) ;
-        features.descr = features.descr(:,sel) ;
-        features.contrast = features.contrast(:,sel) ;
-        fprintf('%d,%d\n',size(s,1),size(features.frame,2));
         Q = [features.frame(1,1);features.frame(2,1)];
         [index, dist] = vl_kdtreequery (kdtree, temp, Q);
         if dist <= features.frame(3,1);
