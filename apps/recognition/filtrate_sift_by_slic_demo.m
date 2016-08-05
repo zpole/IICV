@@ -11,6 +11,5 @@ im = im(1:375,end-500+1:end,:) ;
   
   h = size(im,1) ;
   features = getDenseSIFT(im) ;     %getdensesift（default）
-  fprintf('%d,%d\n',size(s,1),size(features.frame,2));
   feature=filtrate_sift_by_slic(h,s,features, 'dsift');       %filtrate sift descriptor by slic edge
 save testme.mat;
