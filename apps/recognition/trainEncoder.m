@@ -144,7 +144,6 @@ parfor i = 1:numImages
   w = size(im,2) ;
   h = size(im,1) ;
   features = encoder.extractorFn(im) ;     %getdensesift（default）
-  fprintf('%d,%d\n', size(features.frame,2) , size(s,1)) ;
   
   features = filtrate_sift_by_slic(h,s,features, 'dsift');       %filtrate sift descriptor by slic edge
   
