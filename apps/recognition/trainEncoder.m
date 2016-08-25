@@ -136,21 +136,21 @@ parfor i = 1:numImages
   fprintf('%s: reading: %s\n', mfilename, images{i}) ;
   im = encoder.readImageFn(images{i}) ;
   %slic
-  segments = vl_slic(im, 50, 0.1, 'verbose') ;
+  segments = vl_slic(im, 150, 1, 'verbose') ;
   [sx,sy]=vl_grad(double(segments), 'type', 'forward') ;
   s = find(sx | sy) ;     %save the number of edge pixels
   %slic end
   
   w = size(im,2) ;
   h = size(im,1) ;
-  features = encoder.extractorFn(im) ;     %getdensesift（default）
+  features = encoder.extractorFn(im) ;     %getdensesift（default)
   
   features = filtrate_sift_by_slic(h,s,features, 'dsift');       %filtrate sift descriptor by slic edge
   
   randn('state',0) ;
   rand('state',0) ;
   sel = vl_colsubset(1:size(features.descr,2), single(numDescrsPerImage)) ;
-  descrs{i} = features.descr(:,sel) ;      
+  descrs{i} = features.descr(:,sel) ;
   frames{i} = features.frame(:,sel) ;
   frames{i} = bsxfun(@times, bsxfun(@minus, frames{i}(1:2,:), [w;h]/2), 1./[w;h]) ;
 end
