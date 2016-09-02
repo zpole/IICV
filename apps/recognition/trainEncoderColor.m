@@ -1,4 +1,4 @@
-function encoder = trainEncoder(images, varargin)
+function encoder = trainEncoderColor(images, varargin)
 % TRAINENCODER   Train image encoder: BoVW, VLAD, FV
 %   ENCODER = TRAINENCOER(IMAGES) trains a BoVW encoder from the
 %   specified list of images IMAGES.
