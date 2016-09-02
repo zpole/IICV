@@ -19,9 +19,11 @@ for pass = 1:2
   opts.resultDir = fullfile(opts.dataDir, opts.prefix) ;
   opts.imdbPath = fullfile(opts.resultDir, 'imdb.mat') ;
   opts.encoderPath = fullfile(opts.resultDir, 'encoder.mat') ;
+  opts.encodercolorPath = fullfile(opts.resultDir, 'encodercolor.mat') ;
   opts.modelPath = fullfile(opts.resultDir, 'model.mat') ;
   opts.diaryPath = fullfile(opts.resultDir, 'diary.txt') ;
   opts.cacheDir = fullfile(opts.resultDir, 'cache') ;
+  opts.colorcacheDir = fullfile(opts.resultDir, 'colorcache') ;
   opts = vl_argparse(opts,varargin) ;
 end
 
@@ -34,6 +36,7 @@ if exist(fullfile(opts.resultDir,'result.mat')),
 end
 
 vl_xmkdir(opts.cacheDir) ;
+vl_xmkdir(opts.colorcacheDir) ;
 diary(opts.diaryPath) ; diary on ;
 disp('options:' ); disp(opts) ;
 
@@ -70,12 +73,20 @@ else
                          opts.encoderParams{:}, ...
                          'lite', opts.lite) ;
   save(opts.encoderPath, '-struct', 'encoder') ;
+  encodercolor = trainEncoderColor(fullfile(imdb.imageDir,imdb.images.name(train)), ...
+                         opts.encoderParams{:}, ...
+                         'lite', opts.lite) ;
+  save(opts.encodercolorPath, '-struct', 'encodercolor') ;
   diary off ;
   diary on ;
 end
 
 descrs = encodeImage(encoder, fullfile(imdb.imageDir, imdb.images.name), ...
   'cacheDir', opts.cacheDir) ;
+descrscolor = encodeImageColor(encodercolor, fullfile(imdb.imageDir, imdb.images.name), ...
+  'cacheDir', opts.colorcacheDir) ;
+descrs = cat(1,descrs,descrscolor);
+save traintest;
 diary off ;
 diary on ;
 
