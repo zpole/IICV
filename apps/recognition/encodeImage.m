@@ -42,6 +42,7 @@ for c = 1:numChunks
     fprintf('%s: processing a chunk of %d images (%3d of %3d, %5.1fs to go)\n', ...
       mfilename, numel(range), ...
       c, numChunks, toc(startTime) / (c - 1) * (numChunks - c + 1)) ;
+  
     data = processChunk(encoder, im(range)) ;
     if ~isempty(opts.cacheDir)
       save(chunkPath, 'data') ;
@@ -73,9 +74,7 @@ function psi = encodeOne(encoder, im)
 % --------------------------------------------------------------------
 
 im = encoder.readImageFn(im) ;
-
 features = encoder.extractorFn(im) ;
-
 imageSize = size(im) ;
 psi = {} ;
 for i = 1:size(encoder.subdivisions,2)
@@ -94,14 +93,12 @@ for i = 1:size(encoder.subdivisions,2)
   if encoder.renormalize
     descrs = bsxfun(@times, descrs, 1./max(1e-12, sqrt(sum(descrs.^2)))) ;
   end
-
+  
   w = size(im,2) ;
   h = size(im,1) ;
   frames = features.frame(1:2,:) ;
   frames = bsxfun(@times, bsxfun(@minus, frames, [w;h]/2), 1./[w;h]) ;
-
   descrs = extendDescriptorsWithGeometry(encoder.geometricExtension, frames, descrs) ;
-
   switch encoder.type
     case 'bovw'
       [words,distances] = vl_kdtreequery(encoder.kdtree, encoder.words, ...

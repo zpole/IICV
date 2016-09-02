@@ -134,7 +134,9 @@ numDescrsPerImage = ceil(opts.numWords * opts.numSamplesPerWord / numImages) ;
 fprintf('numImages:%d\n', numImages);
 parfor i = 1:numImages
   fprintf('%s: reading: %s\n', mfilename, images{i}) ;
-  im = encoder.readImageFn(images{i}) ;
+  %im = encoder.readImageFn(images{i}) ;
+   
+  im = readcolorImage(images{i}) ;
   
   %slic
   %segments = vl_slic(im, 150, 1, 'verbose') ;
@@ -144,7 +146,9 @@ parfor i = 1:numImages
   
   w = size(im,2) ;
   h = size(im,1) ;
-  features = encoder.extractorFn(im) ;     %getdensesift???default)
+  %features = encoder.extractorFn(im) ;     %getdensesift???default)
+  
+  features = getDenseColor(im);
 
   %features = filtrate_sift_by_slic(h,s,features, 'dsift');       %filtrate sift descriptor by slic edge
   

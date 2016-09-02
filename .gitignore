@@ -62,4 +62,8 @@ data/lite-voc07-vlad-aug
 
 data/ex-voc07-vlad-aug
 
-*.mat
+
+*.jpg
+
+*.pdf
+
