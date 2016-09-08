@@ -76,6 +76,21 @@ end
 
 descrs = encodeImage(encoder, fullfile(imdb.imageDir, imdb.images.name), ...
   'cacheDir', opts.cacheDir) ;
+
+im = fullfile(imdb.imageDir, imdb.images.name);
+
+for i = 1:numel(im)
+    im_c = readImage2(im{i});
+    [tmp_col, infodcolor] = func_color(im_c);
+   descrs_col{i} = tmp_col(:); 
+   
+end
+
+descrs_col = cat(2, descrs_col{:}) ;
+
+descrs = cat(1, descrs, descrs_col);
+
+save final_des.mat
 diary off ;
 diary on ;
 
@@ -125,7 +140,11 @@ for c = 1:numel(classRange)
     y(loc) = 1 - imdb.classes.difficult{classRange(c)} ;
   end
   if all(y <= 0), continue ; end
-
+  
+  %
+ %descrs = cat(1, descrs, descrs_col);
+ %
+ save deeee.mat
   [w{c},b{c}] = vl_svmtrain(descrs(:,train), y(train), lambda, par{:}) ;
   scores{c} = w{c}' * descrs + b{c} ;
 

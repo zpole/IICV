@@ -24,6 +24,8 @@ opts.cacheDir = [] ;
 opts.cacheChunkSize = 512 ;
 opts = vl_argparse(opts,varargin) ;
 
+
+
 if ~iscell(im), im = {im} ; end
 
 % break the computation into cached chunks
@@ -47,11 +49,13 @@ for c = 1:numChunks
       save(chunkPath, 'data') ;
     end
   end
+   
   descrs{c} = data ;
   clear data ;
 end
 descrs = cat(2,descrs{:}) ;
-
+ save imageccoder.mat
+ 
 % --------------------------------------------------------------------
 function psi = processChunk(encoder, im)
 % --------------------------------------------------------------------
@@ -67,6 +71,7 @@ else
   end
 end
 psi = cat(2, psi{:}) ;
+
 
 % --------------------------------------------------------------------
 function psi = encodeOne(encoder, im)
@@ -121,17 +126,23 @@ for i = 1:size(encoder.subdivisions,2)
                                          descrs, ...
                                          'MaxComparisons', 15) ;
       assign = zeros(encoder.numWords, numel(words), 'single') ;
+      
+
       assign(sub2ind(size(assign), double(words), 1:numel(words))) = 1 ;
+      
+    % fprintf('cc=%d dd=%d',descrs,encoder.words);
       z = vl_vlad(descrs, ...
                   encoder.words, ...
                   assign, ...
                   'SquareRoot', ...
                   'NormalizeComponents') ;
+            
   end
   z = z / max(sqrt(sum(z.^2)), 1e-12) ;
   psi{i} = z(:) ;
 end
 psi = cat(1, psi{:}) ;
+
 
 % --------------------------------------------------------------------
 function psi = getFromCache(name, cache)

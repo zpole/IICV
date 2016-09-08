@@ -136,9 +136,9 @@ parfor i = 1:numImages
   im = encoder.readImageFn(images{i}) ;
   
   %slic
-  segments = vl_slic(im, 80, 1, 'verbose') ;
-  [sx,sy]=vl_grad(double(segments), 'type', 'forward') ;
-  s = find(sx | sy) ;     %save the number of edge pixels
+ % segments = vl_slic(im, 80, 1, 'verbose') ;
+ % [sx,sy]=vl_grad(double(segments), 'type', 'forward') ;
+ % s = find(sx | sy) ;     %save the number of edge pixels
   %slic end
   
   w = size(im,2) ;
@@ -146,18 +146,18 @@ parfor i = 1:numImages
 
   features = encoder.extractorFn(im) ;     %getdensesiftï¼ˆdefaultï¼?
   
-  im_c = readImage2(images{i});
+ % im_c = readImage2(images{i});
   
-  [fea_color, info] = func_color(im_c);
-  col_info = [];
-  for j = 1:size(info,2)    
-        col_info = [col_info, [info(2,j);  info(1,j); info(7,j) / 2]];
-  end
+ % [fea_color, info] = func_color(im_c);
+ % col_info = [];
+  %for j = 1:size(info,2)    
+  %      col_info = [col_info, [info(2,j);  info(1,j); info(7,j) / 2]];
+ % end
  
   
 %  fprintf('%d,%d\n', size(features.frame,2) , size(s,1)) ;
   
-  features = filtrate_sift_by_slic(h,s,features);       %filtrate sift descriptor by slic edge
+ % features = filtrate_sift_by_slic(h,s,features);       %filtrate sift descriptor by slic edge
   
 %  a = [1;2;3];
 %  b = ones(128,1);
@@ -165,8 +165,8 @@ parfor i = 1:numImages
   randn('state',0) ;
   rand('state',0) ;
   sel = vl_colsubset(1:size(features.descr,2), single(numDescrsPerImage)) ;
-  descrs{i} =  [features.descr(:,sel),  fea_color] ;      
-  frames{i} = [features.frame(:,sel), col_info] ;
+  descrs{i} =  features.descr(:,sel);      
+  frames{i} = features.frame(:,sel);
   frames{i} = bsxfun(@times, bsxfun(@minus, frames{i}(1:2,:), [w;h]/2), 1./[w;h]) ;
 end
 descrs = cat(2, descrs{:}) ;
