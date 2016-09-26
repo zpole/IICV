@@ -24,12 +24,12 @@ for te=ter
            'PeakThresh',   0,  ...
            'EdgeThresh',   te, ...
            'FirstOctave', -1  ) ;
-  h1 = vl_plotframe(f) ;
-  set(h1,'color','k','linewidth',3) ;
+  %h1 = vl_plotframe(f) ;
+  %set(h1,'color','k','linewidth',3) ;
   h2 = vl_plotframe(f) ;
   set(h2,'color','y','linewidth',2) ;
 
   vl_demo_print(sprintf('sift_edge_%d', find(te==ter))) ;
-  delete(h1) ;
-  delete(h2) ;
+  %delete(h1) ;
+  %delete(h2) ;
 end

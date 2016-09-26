@@ -73,19 +73,19 @@ else
                          opts.encoderParams{:}, ...
                          'lite', opts.lite) ;
   save(opts.encoderPath, '-struct', 'encoder') ;
-  encodercolor = trainEncoderColor(fullfile(imdb.imageDir,imdb.images.name(train)), ...
-                         opts.encoderParams{:}, ...
-                         'lite', opts.lite) ;
-  save(opts.encodercolorPath, '-struct', 'encodercolor') ;
+  %encodercolor = trainEncoderColor(fullfile(imdb.imageDir,imdb.images.name(train)), ...
+  %                       opts.encoderParams{:}, ...
+  %                       'lite', opts.lite) ;
+  %save(opts.encodercolorPath, '-struct', 'encodercolor') ;
   diary off ;
   diary on ;
 end
 
 descrs = encodeImage(encoder, fullfile(imdb.imageDir, imdb.images.name), ...
   'cacheDir', opts.cacheDir) ;
-descrscolor = encodeImageColor(encodercolor, fullfile(imdb.imageDir, imdb.images.name), ...
-  'cacheDir', opts.colorcacheDir) ;
-descrs = cat(1,descrs,descrscolor);
+%descrscolor = encodeImageColor(encodercolor, fullfile(imdb.imageDir, imdb.images.name), ...
+%  'cacheDir', opts.colorcacheDir) ;
+%descrs = cat(1,descrs,descrscolor);
 save traintest;
 diary off ;
 diary on ;
@@ -112,7 +112,7 @@ switch opts.kernel
     assert(false) ;
 end
 descrs = bsxfun(@times, descrs, 1./sqrt(sum(descrs.^2))) ;
-
+%descrscolor = bsxfun(@times, descrscolor, 1./sqrt(sum(descrs.^2))) ;
 % train and test
 train = find(imdb.images.set <= 2) ;
 test = find(imdb.images.set == 3) ;
@@ -140,6 +140,13 @@ for c = 1:numel(classRange)
   [w{c},b{c}] = vl_svmtrain(descrs(:,train), y(train), lambda, par{:}) ;
   scores{c} = w{c}' * descrs + b{c} ;
 
+  %[w1{c},b1{c}] = vl_svmtrain(descrscolor(:,train), y(train), lambda, par{:}) ;
+  %scores1{c} = w1{c}' * descrscolor + b1{c} ;
+  
+  %if scores1{c} > scores{c}
+  %    scores{c} = scores1{c};
+  %end
+  
   [~,~,info] = vl_pr(y(test), scores{c}(test)) ;
   ap(c) = info.ap ;
   ap11(c) = info.ap_interp_11 ;
@@ -147,7 +154,6 @@ for c = 1:numel(classRange)
           ap(c) * 100, ap11(c)*100) ;
 end
 scores = cat(1,scores{:}) ;
-
 diary off ;
 diary on ;
 

@@ -92,7 +92,7 @@ if isempty(opts.numWords)
       case {'bovw'}
         opts.numWords = 1024 ;
       case {'fv'}
-        opts.numWords = 64 ;
+        opts.numWords = 1024 ;
         opts.numPcaDimensions = 80 ;
       case {'vlad'}
         opts.numWords = 64 ;
@@ -137,16 +137,18 @@ parfor i = 1:numImages
   im = encoder.readImageFn(images{i}) ;
   
   %slic
-  %segments = vl_slic(im, 150, 1, 'verbose') ;
-  %[sx,sy]=vl_grad(double(segments), 'type', 'forward') ;
-  %s = find(sx | sy) ;     %save the number of edge pixels
+  segments = vl_slic(im, 50, 0.1, 'verbose') ;
+  [sx,sy]=vl_grad(double(segments), 'type', 'forward') ;
+  s = find(sx | sy) ;     %save the number of edge pixels
   %slic end
   
   w = size(im,2) ;
   h = size(im,1) ;
   features = encoder.extractorFn(im) ;     %getdensesift???default)
-
-  %features = filtrate_sift_by_slic(h,s,features, 'dsift');       %filtrate sift descriptor by slic edge
+  
+  %[features.frame,features.descr]=vl_phow(im2single(im));
+  
+  features = filtrate_sift_by_slic(h,s,features, 'dsift');       %filtrate sift descriptor by slic edge
   
   randn('state',0) ;
   rand('state',0) ;

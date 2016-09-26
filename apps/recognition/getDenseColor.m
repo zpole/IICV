@@ -5,11 +5,12 @@ function features = getDenseColor(im)
 %opts.deltax                       = 120;
 %opts.deltay                       = 90;
 %options.color                     = 1;
-%options.nbins                     = 3;
+%options.nbins                     = 4;
 %options.patchsize                 = 2;
-%options.norm                      = 1;
-%%options.clamp                     = 0.2;
-[descr, frame] = denseCOLOR(im);  %[descr, frame] = denseCOLOR(im,options);
+%options.norm                      = 0;
+%%%options.clamp                     = 0.2;
+[descr, frame] = denseCOLOR(im);  
+%[descr, frame] = denseCOLOR(im,options);
 frame([1,2],:)=frame([2,1],:);
 frame(7,:)=frame(7,:)/2;
 frame(3:6,:)=[];

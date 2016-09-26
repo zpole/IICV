@@ -75,6 +75,12 @@ function psi = encodeOne(encoder, im)
 
 im = encoder.readImageFn(im) ;
 features = encoder.extractorFn(im) ;
+
+%im = vl_impattern(im);
+%[frame,descr]=vl_phow(im2single(im));
+%eatures.frame = frame;
+%features.descr = descr;
+
 imageSize = size(im) ;
 psi = {} ;
 for i = 1:size(encoder.subdivisions,2)

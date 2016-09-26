@@ -90,7 +90,7 @@ end
 if isempty(opts.numWords)
     switch opts.type
       case {'bovw'}
-        opts.numWords = 1024 ;
+        opts.numWords = 64 ;
       case {'fv'}
         opts.numWords = 64 ;
         opts.numPcaDimensions = 80 ;
@@ -137,20 +137,20 @@ parfor i = 1:numImages
   %im = encoder.readImageFn(images{i}) ;
    
   im = readcolorImage(images{i}) ;
-  
+  im2 = im2single(im);
   %slic
-  %segments = vl_slic(im, 150, 1, 'verbose') ;
+  %segments = vl_slic(im2, 150, 1, 'verbose') ;
   %[sx,sy]=vl_grad(double(segments), 'type', 'forward') ;
   %s = find(sx | sy) ;     %save the number of edge pixels
   %slic end
   
   w = size(im,2) ;
   h = size(im,1) ;
-  %features = encoder.extractorFn(im) ;     %getdensesift???default)
+  %eatures = encoder.extractorFn(im) ;     %getdensesift???default)
   
   features = getDenseColor(im);
 
-  %features = filtrate_sift_by_slic(h,s,features, 'dsift');       %filtrate sift descriptor by slic edge
+  %features = filtrate_sift_by_slic(h,s,features, 'dcolor');       %filtrate sift descriptor by slic edge
   
   randn('state',0) ;
   rand('state',0) ;

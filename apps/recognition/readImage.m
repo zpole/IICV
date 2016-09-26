@@ -28,6 +28,8 @@ end
 
 im = im2single(im) ;
 
+%im =  vl_impattern(im);
+
 scale = 1 ;
 if (size(im,1) > 480)
   scale = 480 / size(im,1) ;
